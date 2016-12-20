@@ -1,0 +1,28 @@
+1- De Jong's function in 2D: 
+	f(x, y) = x^2 + y^2
+
+2- Rosenbrock's function in 2D: 
+	f(x, y) = (a - x)^2 + b * (y^2 - x^2)^2
+	a and b are constants let a = 1 and b = 100 for example.
+
+3- Rastrigin's function: 
+	f(x1 ... xn) = A * n + sigma(i = 1 to n)(Xi^2 - A cos(2 * pi * Xi))
+
+	in 2-D ==> 2 variables:
+	f(x1, x2) = A * n + (X1^2 - A * cos(2 * pi * X1)) + (X2^2 - A * cos(2 * pi * X2))
+	Where A is a constant let A = 10.
+
+4- Easom's function: 
+	f(x, y) = -cos(x) * cos(y) * exp(*((x - pi)^2 + (y - pi)^2))
+
+5- Branins's function:
+	f(x1, x2) = a * (X2 - b * X1^2 + c * X1 - r)^2 + s * (1 - t) * cos(X1) + s
+	Where:
+	a = 1, b = 5.1/(4 * pi^2), c = 5/pi, s = 10, t = 1/(8 * pi)
+	and r is a constant let r = 6.
+
+
+
+
+More information: 
+https://en.wikipedia.org/wiki/Test_functions_for_optimization#Test_functions_for_single-objective_optimization_problems
