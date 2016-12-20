@@ -2,8 +2,11 @@ function [ result ] = UniVariant(func, start_point, maxi)
     syms x y
     result = start_point;
     checkStep = 0;
+    fresult_last = -1000;
+    fresult = 1000;
+    last_result = result + 1;
     probing_length = 0.01;
-    while(StopCondition(func,result) == 0)
+    while(StopByLast( last_result,result,10e-4 ))
         % determine which axis to move
         if(checkStep == 0)
             S = [1,0];
@@ -11,17 +14,30 @@ function [ result ] = UniVariant(func, start_point, maxi)
             S = [0,1];
         end
         % probe
-        S = Probe(func,2,result,S,probing_length,maxi)
+        S = Probe(func,2,result,S,probing_length,maxi);
         % get perfect lamda
-        lamda = getLamda(func, result, S)
+        lamda = getLamda(func, result, S);
         if(length(lamda) == 1)
-            f_result = subs(func, [x,y], result + lamda.*S)
+            fresult_last = fresult;
+            f_result = subs(func, [x,y], result + lamda.*S);
         else
-            lamda
+            for j = 1:length(lamda)
+                if(isreal(lamda(j)))
+                    real_lamda = lamda(j)
+                end
+            end
+            fresult_last = fresult;
+            f_result = subs(func,[x,y],result + real_lamda.*S);
+            lamda = real_lamda;
         end
-        result = result + lamda.*S
+        if(lamda == 0)
+            break;
+        end
+        last_result = result;
+        result = result + lamda.*S;
         checkStep = mod(checkStep + 1,2);
-        input('next iteration?');
     end
+    disp('the final result is');
+    disp(result);     
 end
 
