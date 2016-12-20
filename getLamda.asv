@@ -1,0 +1,9 @@
+function [ lamda ] = getLamda(func, X, Step)
+    syms x y l
+    % l is lamda
+    val = X+(l.*Step)
+    lamdaFunction = subs(func,[x,y],val);
+    ediff(lamdaFunction,l);
+    subs
+end
+
