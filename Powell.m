@@ -10,18 +10,32 @@ function [ result ] = Powell(func,variable_num,result, maxi)
             % each cycle compute the result and save the first one
             % probe with selector column
             Dir = Probe(func,variable_num ,result, S(selector(i),:), probing_length, maxi);
-            lamda = getLamda(func, result, Dir);
-            if(i == 1)
-                Z = result + lamda.*Dir;
+            lamda = double(getLamda(func, result, Dir));
+            if(length(lamda) ~= 1)
+                mini = 10000;
+                miniIndex = 1;
+               for k = 1: length(lamda)
+                  temp = getValue(func,double(result) + lamda(k).*Dir);
+                  if(temp < mini)
+                      mini = temp;
+                      miniIndex = k;
+                  end
+               end
+            else
+                k = 1;
             end
-            last_value = result;
-            result = result + (lamda.*Dir);
+            if(i == 1)
+                Z = double(result) + lamda(k).*Dir;
+            end
+            last_value = double(result);
+            result = double(result) + (lamda(k).*Dir);
         end
         % shift them
         S = circshift(S,1);
         S(variable_num,:) = result - Z;
     end
-    disp('the final result is \n');
+    disp('the final result of powell method is \n');
     disp(result);
+    disp(getValue(func,result));
 end
 

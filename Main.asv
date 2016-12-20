@@ -6,19 +6,17 @@
 % subs(f , value ) 
 
 %%
-clc
 syms x y
 f = x^2 + y^2;
-%ezmesh(f);
+ezmesh(f);
 UniVariant(f, [3 3], 0);
 Powell(f,2,[3,3],0);
 
 %%
-clc
 f = (1 - x)^2 + 100 * (y^2 - x^2)^2;
 %ezmesh(f);
-UniVariant(f, [1 1], 0);
-Powell(f,2,[1 1],0);
+UniVariant(f, [0 0], 0);
+Powell(f,2,[0,0],0);
 
 
 
