@@ -6,7 +6,7 @@ function [ result ] = UniVariant(func, start_point, maxi)
     fresult = 1000;
     last_result = result + 1;
     probing_length = 0.01;
-    while(StopByLast( last_result,result,10e-4 ))
+    while(StopByLast( last_result,result,10e-4 ) == 0)
         % determine which axis to move
         if(checkStep == 0)
             S = [1,0];
@@ -14,7 +14,7 @@ function [ result ] = UniVariant(func, start_point, maxi)
             S = [0,1];
         end
         % probe
-        S = Probe(func,2,result,S,probing_length,maxi);
+        S = Probe(func,2,result,S,probing_length,maxi)
         % get perfect lamda
         lamda = getLamda(func, result, S);
         if(length(lamda) == 1)
@@ -30,7 +30,7 @@ function [ result ] = UniVariant(func, start_point, maxi)
             f_result = subs(func,[x,y],result + real_lamda.*S);
             lamda = real_lamda;
         end
-        if(lamda == 0)
+        if(lamda < 10e-4)
             break;
         end
         last_result = result;
