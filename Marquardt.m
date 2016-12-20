@@ -20,7 +20,7 @@ function f = Marquardt(z, xi, yi, N)
 
     %N = 10;%Number of iterations.
     
-    EPS = 0.001;
+    EPS = 0.01;
     xi = x0;
     
     for i = 1: N
@@ -42,7 +42,10 @@ function f = Marquardt(z, xi, yi, N)
         else
             alpha = c2 * alpha;
         end
-        xi = xNew
+        xi = xNew;
     end
+    display('Marquardt final answer');
+    f = double(xi);
+    disp(f);
     %print xi %tracing
 end
