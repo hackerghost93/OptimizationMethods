@@ -11,18 +11,20 @@ grad = gradient(objfnc,[x,y]);
 
 while or(dx>=Error, n <= maxiter)  
     
-    f=subs(grad,{x,y},StartP);
-    Xnew = x0 - lamda*f ;
+    f=subs(grad,{x,y},x0);
+    Xnew = x0' - lamda*f;
     
     if ~isfinite(Xnew)
     error('x is inf or NaN')
     end
     
-    x0 = Xnew ;
+    dx= norm(f);
+    x0 = Xnew' ;
+    XSteps(n)= Xnew ;
     n= n+1 ;
-    dx= abs(Xnew-x);
-    %XSteps(n)= Xnew ;
+  
 end
 
+end
  
  
