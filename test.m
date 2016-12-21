@@ -1,4 +1,10 @@
-syms objFunc x y;
-objFunc = x-y+2*x^2+2*x*y+y^2;
+syms objFunc x y m;
+objFunc = x^2 + y^2 ;
 startP = [0,0];
-optimal = newton(objFunc,startP)
+[ Xnew,dx ,n ] = gradientDescent(objFunc ,startP)
+    
+
+
+%     diff(objFunc)
+%[Xnew , dx , n , Xsteps ] = gradientDescent(objFunc , startP)
+%optimal = newton(objFunc,startP)
